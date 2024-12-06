@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import LoginForm from "./components/LoginForm";
 import Dashboard from "./pages/Dashboard";
 import Users from "./pages/Users";
+import Register from "./pages/Register";
 
 
 const Seguridad = () => <h1 className="text-xl font-bold">Página de Seguridad</h1>;
@@ -25,9 +26,11 @@ const App = () => {
           }
         />
 
-        {/* Dashboard */}
+        <Route path="register" element={<Register />} />
+         
+         {/* Dashboard */}
         <Route
-          path="/dashboard"
+          path="/dashboard/"
           element={
             isAuthenticated ? <Dashboard /> : <Navigate to="/" />
           }
