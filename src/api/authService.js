@@ -12,7 +12,7 @@ const authHeader = () => {
     }
 
     if (user && user?.token) {
-        cconsole.log("user: ", user);
+        console.log("user: ", user);
         return { Authorization: 'Bearer ' + user.token };
     } else {
         console.log("Unauthorized");

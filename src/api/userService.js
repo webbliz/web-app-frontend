@@ -1,31 +1,55 @@
 const API_URL = "http://localhost:3000/users";
-import authHeader from "./authService";
+import authService from "./authService";
 
-export const getUsers = async () => {
-  const response = await fetch(API_URL);
+const auth = authService.authHeader();
+
+const getUsers = async () => {
+  const response = await fetch(API_URL, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", ...auth}
+  });
   return response.json();
 };
 
-export const createUser = async (user) => {
-  const auth = authHeader();
+const getAuthUser = async () => {
+  const response = await fetch(`${API_URL}/user`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json", ...auth}
+  });
+  return response.json();
+}
+
+
+const createUser = async (user) => {
   const response = await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json", auth },
+    headers: { "Content-Type": "application/json", ...auth },
     body: JSON.stringify(user),
   });
   return response.json();
 };
 
-export const updateUser = async (id, user) => {
-  const response = await fetch(`${API_URL}/${id}`, {
+const updateUser = async (u_id, user) => {
+  const response = await fetch(`${API_URL}/${u_id}`, {
     method: "PUT",
-    headers: { "Content-Type": "application/json" },
+    headers: { "Content-Type": "application/json", ...auth },
     body: JSON.stringify(user),
   });
   return response.json();
 };
 
-export const deleteUser = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, { method: "DELETE" });
+const deleteUser = async (u_id) => {
+  const response = await fetch(`${API_URL}/${u_id}`, { 
+    method: "DELETE",
+    headers: {"Content-Type": "application/json", ...auth },
+  });
   return response.json();
 };
+
+export default {
+  getUsers,
+  createUser,
+  updateUser,
+  deleteUser,
+  getAuthUser,
+}
