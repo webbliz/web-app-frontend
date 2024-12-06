@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const Modal = ({ isOpen, onClose, children }) => {
   if (!isOpen) return null;
@@ -12,7 +12,7 @@ const Modal = ({ isOpen, onClose, children }) => {
             onClick={onClose}
             className="px-4 py-2 text-white bg-red-500 rounded hover:bg-red-600"
           >
-            Cerrar
+            Close
           </button>
         </div>
       </div>
