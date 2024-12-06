@@ -76,6 +76,18 @@ const LoginForm = ({ onLogin }) => {
             ¿Olvidaste tu contraseña?
           </a>
         </div>
+
+        <div>
+          <hr
+            className="my-6 h-px border-t-0 bg-transparent bg-gradient-to-r from-transparent via-neutral-500 to-transparent opacity-25 dark:via-neutral-400" />
+            <p className="my-2 block text-sm font-medium text-gray-600">
+              ¿No tienes cuenta?
+            </p>
+            <button type="button"             
+            className="w-full px-4 py-2 text-white bg-indigo-600 rounded-lg shadow-md hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none">
+              Regístrate Aquí
+            </button>
+        </div>
       </div>
     </div>
   );
