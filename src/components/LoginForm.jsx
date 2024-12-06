@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import authService from "../api/authService";
 
 const LoginForm = ({ onLogin }) => {
   const [email, setEmail] = useState("");
@@ -11,13 +12,19 @@ const LoginForm = ({ onLogin }) => {
     e.preventDefault();
 
     // Validar credenciales de prueba
-    if (email === "test@domain.com" && password === "123456") {
-      onLogin(); // Marcar al usuario como autenticado
-      navigate("/dashboard"); // Redirigir al Dashboard
+
+    console.log(email, password);
+    authService.login(email, password).then(
+    () => { 
       setError("");
-    } else {
-      setError("Credenciales incorrectas. Intenta de nuevo.");
-    }
+      onLogin(); // Marcar al usuario como autenticado
+      navigate("/dashboard") //Redirigir al Dashboard
+    }).catch((err) => {
+      setError("Credenciales Incorrectas. Intente de Nuevo")
+    });
+    // onLogin(); // Marcar al usuario como autenticado
+    // navigate("/dashboard")
+  
   };
 
   return (
