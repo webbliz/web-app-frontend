@@ -16,15 +16,17 @@ const RegistrationForm = ({ onRegister }) => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-xl">
+            <h1 className="text-3xl font-bold text-center text-indigo-600">Registra tu cuenta</h1>
+        <p className="mt-2 text-sm text-center text-gray-600">
+          Ingresa tus información para ser parte de nuestra comunidad.
+        </p>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="mt-6 space-y-4"
                 >
-                    <h2 className="text-2xl font-bold mb-6 text-center text-gray-700">Registro</h2>
-
                     {/* Username Field */}
                     <div className="mb-4">
-                        <label className="block text-gray-700 font-medium">Username</label>
+                        <label className="block text-sm font-medium text-gray-700">Username</label>
                         <input
                             {...register('username', { required: 'Username is required' })}
                             className={`w-full px-3 py-2 border ${errors.username ? 'border-red-500' : 'border-gray-300'
@@ -37,7 +39,7 @@ const RegistrationForm = ({ onRegister }) => {
 
                     {/* Email Field */}
                     <div className="mb-4">
-                        <label className="block text-gray-700 font-medium">Email</label>
+                        <label className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
                         <input
                             type="email"
                             {...register('email', {
@@ -57,7 +59,7 @@ const RegistrationForm = ({ onRegister }) => {
 
                     {/* Password Field */}
                     <div className="mb-4">
-                        <label className="block text-gray-600 font-medium">Contraseña</label>
+                        <label className="block text-sm font-medium text-gray-700">Contraseña</label>
                         <input
                             type="password"
                             {...register('password', {
@@ -77,7 +79,7 @@ const RegistrationForm = ({ onRegister }) => {
 
                     {/* Role Field */}
                     <div className="mb-4">
-                        <label className="block text-gray-700 font-medium">Rol</label>
+                        <label className="block text-sm font-medium text-gray-700">Rol</label>
                         <select
                             {...register('role', { required: 'Role is required' })}
                             className={`w-full px-3 py-2 border ${errors.role ? 'border-red-500' : 'border-gray-300'
@@ -97,7 +99,7 @@ const RegistrationForm = ({ onRegister }) => {
                         type="submit"
                         className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition duration-300"
                     >
-                        Someter
+                        Crear Cuenta
                     </button>
                 </form>
                 <div>
