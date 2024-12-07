@@ -10,10 +10,6 @@ const LoginForm = ({ onLogin }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Validar credenciales de prueba
-
-    console.log(email, password);
     authService.login(email, password).then(
     () => { 
       setError("");
