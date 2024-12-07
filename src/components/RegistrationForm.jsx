@@ -1,17 +1,43 @@
-import React from 'react';
+import React, { useEffect, useReducer, useState} from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
+import authService from '../api/authService';
+import userService from '../api/userService';
+import rolesService from '../api/rolesService';
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = ({ onRegister }) => {
+
+    const navigate = useNavigate();
     const { register, handleSubmit, formState: { errors } } = useForm();
+
+    const [allUsers, setAllUsers] = useState();
+    const [allRoles, setAllRoles] = useState();
+
+    const getAllRoles = async () => {
+        const roles = await rolesService.getRoles();
+        setAllRoles(roles);
+    }
+
 
     const onSubmit = data => {
         // Handle registration logic here
+        authService.registerUser(data).then((res) => {
+            userService.login(data.email, data.password);
+            navigate("/dashboard")
+            return res;
+        }).catch((err) => {
+            console.log(err)
+        }) 
         console.log(data);
         if (onRegister) {
             onRegister(data);
         }
     };
+
+    useEffect(() => {
+        getAllRoles();
+    }, [])
 
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600">
@@ -24,6 +50,19 @@ const RegistrationForm = ({ onRegister }) => {
                     onSubmit={handleSubmit(onSubmit)}
                     className="mt-6 space-y-4"
                 >
+                     {/* Username Field */}
+                     <div className="mb-4">
+                        <label className="block text-sm font-medium text-gray-700">Nombre</label>
+                        <input
+                            {...register('name', { required: 'Name is required' })}
+                            className={`w-full px-3 py-2 border ${errors.name ? 'border-red-500' : 'border-gray-300'
+                                } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                        />
+                        {errors.name && (
+                            <p className="text-red-500 text-sm mt-1">{errors.name.message}</p>
+                        )}
+                    </div>
+
                     {/* Username Field */}
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Username</label>
@@ -81,16 +120,17 @@ const RegistrationForm = ({ onRegister }) => {
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-700">Rol</label>
                         <select
-                            {...register('role', { required: 'Role is required' })}
-                            className={`w-full px-3 py-2 border ${errors.role ? 'border-red-500' : 'border-gray-300'
+                            {...register('r_id', { required: 'Role is required' })}
+                            className={`w-full px-3 py-2 border ${errors.r_id ? 'border-red-500' : 'border-gray-300'
                                 } rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500`}
                         >
-                            <option value="">Selecciona un rol</option>
-                            <option value="Admin">Admin</option>
-                            <option value="General">General</option>
+                            { allRoles?.map((role) => {
+                                return <option value={role.r_id}>{role.role_name}</option>
+                            })}
+
                         </select>
-                        {errors.role && (
-                            <p className="text-red-500 text-sm mt-1">{errors.role.message}</p>
+                        {errors.r_id && (
+                            <p className="text-red-500 text-sm mt-1">{errors.r_id.message}</p>
                         )}
                     </div>
 
