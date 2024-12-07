@@ -42,10 +42,10 @@ const RegistrationForm = ({ onRegister }) => {
     return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-indigo-500 to-purple-600">
             <div className="w-full max-w-sm p-6 bg-white rounded-lg shadow-xl">
-            <h1 className="text-3xl font-bold text-center text-indigo-600">Registra tu cuenta</h1>
-        <p className="mt-2 text-sm text-center text-gray-600">
-          Ingresa tus información para ser parte de nuestra comunidad.
-        </p>
+                <h1 className="text-3xl font-bold text-center text-indigo-600">Registra tu cuenta</h1>
+                <p className="mt-2 text-sm text-center text-gray-600">
+                    Ingresa tus información para ser parte de nuestra comunidad.
+                </p>
                 <form
                     onSubmit={handleSubmit(onSubmit)}
                     className="mt-6 space-y-4"
